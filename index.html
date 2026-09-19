@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An academic demonstration of regular expressions, URL validation, and password policies.">
+  <title>Regex-Based Validation System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Regex Validation System home"><span class="brand-mark">.*</span><span>Regex Validation<br><b>System</b></span></a>
+    <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a class="active" href="index.html">Home</a>
+      <a href="url-validator.html">URL Validator</a>
+      <a href="password-validator.html">Password Validator</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero grid-glow">
+      <div class="eyebrow"><span></span> MODELS OF COMPUTATION · ASSIGNMENT 2</div>
+      <h1>Regex-Based<br><em>Validation System</em></h1>
+      <p class="hero-copy">Understand how regular expressions recognize structured strings—then see the theory working in two practical validation tools.</p>
+      <div class="hero-actions">
+        <a class="button primary" href="url-validator.html">Explore URL Validator <span>→</span></a>
+        <a class="button secondary" href="password-validator.html">Explore Password Validator <span>→</span></a>
+      </div>
+      <div class="hero-terminal" aria-label="Regex illustration">
+        <div><span class="terminal-dot red"></span><span class="terminal-dot yellow"></span><span class="terminal-dot green"></span><small>regex-engine.js</small></div>
+        <code><i>const</i> language = <strong>/^[a-z]+$/</strong>;<br><i>const</i> accepted = language.<b>test</b>(input);<br><span class="terminal-result">→ ACCEPT / REJECT</span></code>
+      </div>
+    </section>
+
+    <section class="section intro" id="about">
+      <div class="section-kicker">01 / FOUNDATION</div>
+      <h2>What is a <em>Regular Expression?</em></h2>
+      <div class="two-column prose">
+        <div>
+          <p>A <strong>regular expression</strong> (regex) is a compact notation for describing a pattern of characters. Instead of listing every acceptable input, it defines the form an input must follow. A regex engine reads the pattern and determines whether a given string contains—or exactly matches—that form.</p>
+          <p>In theory, a regex describes a <strong>regular language</strong>: a set of strings that follow a particular rule. For example, the language described by <code>^[0-9]+$</code> contains every non-empty string made only of digits: <code>7</code>, <code>42</code>, and <code>2026</code>.</p>
+        </div>
+        <div>
+          <p>For validation, we normally anchor a pattern to the beginning and end of the input. This prevents a valid-looking piece inside a larger invalid value from being accepted. Regex is useful because it is precise, fast for structured checks, and easy to reuse in forms, data cleaning, search, log analysis, and text filtering.</p>
+          <div class="example-stack">
+            <div><code>\d+</code><span>one or more digits</span></div>
+            <div><code>[A-Z]</code><span>one uppercase English letter</span></div>
+            <div><code>^[0-9]+$</code><span>an input consisting entirely of digits</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section syntax-section">
+      <div class="section-kicker">02 / REFERENCE</div>
+      <h2>Regex syntax, <em>decoded.</em></h2>
+      <div class="syntax-grid">
+        <div><code>.</code><span>Any character (except a line break in usual mode)</span></div><div><code>*</code><span>Zero or more occurrences</span></div>
+        <div><code>+</code><span>One or more occurrences</span></div><div><code>?</code><span>Zero or one occurrence; often makes a part optional</span></div>
+        <div><code>^</code><span>Beginning of the string</span></div><div><code>$</code><span>End of the string</span></div>
+        <div><code>[]</code><span>Character class: one character from a set or range</span></div><div><code>()</code><span>Group expressions together</span></div>
+        <div><code>|</code><span>OR: select one alternative</span></div><div><code>\d</code><span>A digit, equivalent to <code>[0-9]</code></span></div>
+        <div><code>\w</code><span>Word character: letter, number, or underscore</span></div><div><code>\s</code><span>Whitespace character</span></div>
+        <div><code>{n}</code><span>Exactly <em>n</em> occurrences</span></div><div><code>{n,}</code><span>At least <em>n</em> occurrences</span></div>
+        <div><code>{n,m}</code><span>Between <em>n</em> and <em>m</em> occurrences</span></div>
+      </div>
+    </section>
+
+    <section class="section automata">
+      <div class="section-kicker">03 / THEORY</div>
+      <h2>Regex and <em>Finite Automata</em></h2>
+      <p class="section-lead">The validators are practical examples of a core Models of Computation idea: regular expressions describe regular languages, and finite automata recognize those languages.</p>
+      <div class="theory-flow" aria-label="Theory flow">
+        <div>Regular<br>Expression</div><span>↓</span><div>Regular<br>Language</div><span>↓</span><div>Finite<br>Automaton</div><span>↓</span><div>Input<br>String</div><span>↓</span><div class="accept">Accept<br>/ Reject</div>
+      </div>
+      <div class="theory-cards">
+        <article><h3>Regular languages</h3><p>Languages formed by rules with finite, repeatable structure. URLs with a defined syntax and passwords satisfying a policy are treated as languages in this project.</p></article>
+        <article><h3>NFA & DFA</h3><p>An NFA may have several possible next states; a DFA has exactly one next state for each input symbol. Both recognize exactly the class of regular languages.</p></article>
+        <article><h3>Acceptance</h3><p>An automaton accepts when it finishes in an accepting state. Analogously, our JavaScript regex returns <code>true</code> when the complete input matches its pattern.</p></article>
+      </div>
+      <p class="note">The finite-automata relationship is the theoretical foundation of regex. JavaScript engines have implementation-specific optimizations; this page does not claim they literally turn every JavaScript regex into a DFA.</p>
+    </section>
+
+    <section class="section applications">
+      <div class="section-kicker">04 / PRACTICE</div>
+      <h2>Applications of <em>Regular Expressions</em></h2>
+      <div class="application-grid">
+        <article><span>↗</span><h3>Form validation</h3><p>Check URLs, email formats, phone numbers, and required input structure before submission.</p></article>
+        <article><span>⌕</span><h3>Search & replace</h3><p>Locate repeated patterns and transform text efficiently in editors and data tools.</p></article>
+        <article><span>⌁</span><h3>Data extraction</h3><p>Extract IDs, dates, values, or fields from semi-structured documents and logs.</p></article>
+        <article><span>⊘</span><h3>Text filtering</h3><p>Detect permitted, prohibited, or suspicious patterns in user-entered text.</p></article>
+      </div>
+    </section>
+
+    <section class="section modules">
+      <div class="section-kicker">05 / PROJECT MODULES</div>
+      <h2>Put the theory <em>to work.</em></h2>
+      <div class="module-grid">
+        <article class="module-card url-card"><span class="module-number">01</span><h3>URL Validator</h3><p>Validate whether a URL follows a predefined syntactic structure using a JavaScript regular expression.</p><a href="url-validator.html">Open URL Validator <b>→</b></a></article>
+        <article class="module-card password-card"><span class="module-number">02</span><h3>Strong Password<br>Policy Enforcer</h3><p>Evaluate password policy requirements with regex and detailed, live feedback.</p><a href="password-validator.html">Open Password Validator <b>→</b></a></article>
+      </div>
+    </section>
+  </main>
+  <footer><span>REGEX-BASED VALIDATION SYSTEM</span><span>MODELS OF COMPUTATION · 2026</span></footer>
+  <script src="js/main.js"></script>
+</body>
+</html>
