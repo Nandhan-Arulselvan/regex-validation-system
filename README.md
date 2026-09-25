@@ -68,10 +68,3 @@ Finite automata are the theory behind regular languages; the project does not cl
 ## Run the project
 
 Open `index.html` in a modern browser. The static site needs no installation or backend. Navigate through the header and click the included test cases during a demonstration.
-
-## Future improvements
-
-- Add state diagrams for simplified languages.
-- Add copy-pattern and test-history controls.
-- Expand internationalized domain support.
-- Add accessibility preference controls.
